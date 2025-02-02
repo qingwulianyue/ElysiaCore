@@ -1,0 +1,3 @@
+name: ElysiaCore
+version: '${project.version}'
+main: com.elysia.elysiacore.ElysiaCore
