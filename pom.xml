@@ -67,5 +67,31 @@
           <version>1.12.2-R0.1-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
+      <dependency>
+          <groupId>libs.PlaceholderAPI-2.11.6</groupId>
+          <artifactId>PlaceholderAPI</artifactId>
+          <version>2.11.6</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/libs/PlaceholderAPI-2.11.6.jar</systemPath>
+      </dependency>
+      <dependency>
+          <groupId>libs.Adyeshach-2.0.17</groupId>
+          <artifactId>Adyeshach</artifactId>
+          <version>2.0.17</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/libs/Adyeshach-2.0.17.jar</systemPath>
+      </dependency>
+      <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations</artifactId>
+          <version>20.1.0</version>
+      </dependency>
+      <dependency>
+          <groupId>libs.DragonCore</groupId>
+          <artifactId>DragonCore</artifactId>
+          <version>2.6.2.8</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/libs/DragonCore-2.6.2.8.jar</systemPath>
+      </dependency>
   </dependencies>
 </project>

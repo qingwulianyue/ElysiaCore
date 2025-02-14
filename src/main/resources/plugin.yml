@@ -1,3 +1,8 @@
 name: ElysiaCore
 version: '${project.version}'
 main: com.elysia.elysiacore.ElysiaCore
+commands:
+  ElysiaCore:
+    permission: admin
+    aliases:
+      - ec
