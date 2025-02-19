@@ -5,10 +5,13 @@ import ink.ptms.adyeshach.core.Adyeshach;
 import ink.ptms.adyeshach.core.entity.EntityInstance;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.serverct.ersha.dungeon.DungeonPlus;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class PlaceholderAPIHook extends PlaceholderExpansion {
@@ -32,8 +35,12 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String params) {
         if (player == null || params.isEmpty()) return null;
+        if (params.equals("teamSize")) return getTeamSize(player);
         String[] param = params.split("_");
         if (param[0].equals("name")) return getUUIDName(param[1], player);
+        if (param[0].equals("teamHealth")) return getTeamHealth(param[1], player);
+        if (param[0].equals("teamMaxHealth")) return getTeamMaxHealth(param[1], player);
+        if (param[0].equals("teamName")) return getTeamName(param[1], player);
         return null;
     }
     private String getUUIDName(String param, Player player){
@@ -45,5 +52,55 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             return entityInstance.getDisplayName();
         }
         return entity.getName();
+    }
+    private String getTeamSize(Player player){
+        if (DungeonPlus.INSTANCE.getTeamManager().getTeam(player) == null)
+            return "0";
+        return String.valueOf(Objects.requireNonNull(DungeonPlus.INSTANCE.getTeamManager().getTeam(player)).getPlayers().size());
+    }
+    private String getTeamHealth(String param, Player player){
+        UUID uuid = player.getUniqueId();
+        int tag = Integer.parseInt(param);
+        int i = 0;
+        UUID result = null;
+        for (UUID uid : Objects.requireNonNull(DungeonPlus.INSTANCE.getTeamManager().getTeam(player)).getPlayers()){
+            if (uid == uuid) continue;
+            if (i == tag){
+                result = uid;
+                break;
+            }
+            i++;
+        }
+        return String.valueOf(Bukkit.getPlayer(result).getHealth());
+    }
+    private String getTeamMaxHealth(String param, Player player){
+        UUID uuid = player.getUniqueId();
+        int tag = Integer.parseInt(param);
+        int i = 0;
+        UUID result = null;
+        for (UUID uid : Objects.requireNonNull(DungeonPlus.INSTANCE.getTeamManager().getTeam(player)).getPlayers()){
+            if (uid == uuid) continue;
+            if (i == tag){
+                result = uid;
+                break;
+            }
+            i++;
+        }
+        return String.valueOf(Bukkit.getPlayer(result).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+    }
+    private String getTeamName(String param, Player player){
+        UUID uuid = player.getUniqueId();
+        int tag = Integer.parseInt(param);
+        int i = 0;
+        UUID result = null;
+        for (UUID uid : Objects.requireNonNull(DungeonPlus.INSTANCE.getTeamManager().getTeam(player)).getPlayers()){
+            if (uid == uuid) continue;
+            if (i == tag){
+                result = uid;
+                break;
+            }
+            i++;
+        }
+        return String.valueOf(Bukkit.getPlayer(result).getName());
     }
 }

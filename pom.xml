@@ -93,5 +93,12 @@
           <scope>system</scope>
           <systemPath>${project.basedir}/libs/DragonCore-2.6.2.8.jar</systemPath>
       </dependency>
+      <dependency>
+          <groupId>libs.DungeonPlus-1.4.1</groupId>
+          <artifactId>DungeonPlus</artifactId>
+          <version>1.4.1</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/libs/DungeonPlus-1.4.1.jar</systemPath>
+      </dependency>
   </dependencies>
 </project>
